@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<persistence xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_2.xsd" version="2.2">
+  <persistence-unit name="main">
+    <provider>io.jmix.data.impl.JmixPersistenceProvider</provider>
+    <mapping-file>io/jmix/datatoolsui/orm.xml</mapping-file>
+    <class>io.jmix.data.entity.ReferenceToEntity</class>
+    <class>io.jmix.core.entity.FileRefConverter</class>
+    <class>io.jmix.core.entity.UriConverter</class>
+    <exclude-unlisted-classes/>
+    <properties>
+      <property name="eclipselink.weaving" value="static"/>
+      <property name="io.jmix.enhancing.converters-list" value="io.jmix.core.entity.UriConverter;io.jmix.core.entity.FileRefConverter"/>
+    </properties>
+  </persistence-unit>
+</persistence>

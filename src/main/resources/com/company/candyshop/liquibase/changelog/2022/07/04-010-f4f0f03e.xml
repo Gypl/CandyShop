@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.5.xsd"
+        objectQuotingStrategy="QUOTE_ONLY_RESERVED_WORDS">
+    <changeSet id="1" author="CandyShop">
+        <createTable tableName="CANDY_SHOP">
+            <column name="ID" type="UUID">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_CANDY_SHOP"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet id="2" author="CandyShop">
+        <createTable tableName="CONFECTIONERY">
+            <column name="ID" type="UUID">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_CONFECTIONERY"/>
+            </column>
+            <column name="NAME" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="NUMBER_" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="CANDY_SHOP_ID" type="UUID"/>
+        </createTable>
+    </changeSet>
+    <changeSet id="3" author="CandyShop">
+        <createTable tableName="FLOW_SHEET">
+            <column name="ID" type="UUID">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_FLOW_SHEET"/>
+            </column>
+            <column name="CONFECTIONERY_NAME" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="CANDY_SHOP_ID" type="UUID"/>
+        </createTable>
+    </changeSet>
+    <changeSet id="4" author="CandyShop">
+        <createTable tableName="INGREDIENT">
+            <column name="ID" type="UUID">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_INGREDIENT"/>
+            </column>
+            <column name="NAME" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="NUMBER_" type="DOUBLE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="DIMENSION" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="FLOW_SHEET_ID" type="UUID">
+                <constraints nullable="false"/>
+            </column>
+            <column name="CANDY_SHOP_ID" type="UUID"/>
+        </createTable>
+    </changeSet>
+    <changeSet id="5" author="CandyShop">
+        <createTable tableName="ORDER_">
+            <column name="ID" type="UUID">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_ORDER_"/>
+            </column>
+            <column name="ORDER_NUMBER" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="CONFECTIONERY_NAME" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="START_READY" type="BOOLEAN"/>
+            <column name="SERVR_READY" type="BOOLEAN"/>
+            <column name="CANDY_SHOP_ID" type="UUID"/>
+        </createTable>
+    </changeSet>
+    <changeSet id="6" author="CandyShop">
+        <createTable tableName="PURCHASE">
+            <column name="ID" type="UUID">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_PURCHASE"/>
+            </column>
+            <column name="NAME" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="NUMBER_" type="DOUBLE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="CANDY_SHOP_ID" type="UUID"/>
+        </createTable>
+    </changeSet>
+    <changeSet id="7" author="CandyShop">
+        <createIndex indexName="IDX_CONFECTIONERY" tableName="CONFECTIONERY">
+            <column name="CANDY_SHOP_ID"/>
+        </createIndex>
+
+        <addForeignKeyConstraint baseColumnNames="CANDY_SHOP_ID" baseTableName="CONFECTIONERY"
+                                 constraintName="FK_CONFECTIONERY_ON_CANDY_SHOP" referencedColumnNames="ID"
+                                 referencedTableName="CANDY_SHOP"/>
+    </changeSet>
+    <changeSet id="8" author="CandyShop">
+        <createIndex indexName="IDX_FLOWSHEET_CANDY_SHOP_ID" tableName="FLOW_SHEET">
+            <column name="CANDY_SHOP_ID"/>
+        </createIndex>
+
+        <addForeignKeyConstraint baseColumnNames="CANDY_SHOP_ID" baseTableName="FLOW_SHEET"
+                                 constraintName="FK_FLOW_SHEET_ON_CANDY_SHOP" referencedColumnNames="ID"
+                                 referencedTableName="CANDY_SHOP"/>
+    </changeSet>
+    <changeSet id="9" author="CandyShop">
+        <createIndex indexName="IDX_INGREDIENT_CANDY_SHOP_ID" tableName="INGREDIENT">
+            <column name="CANDY_SHOP_ID"/>
+        </createIndex>
+
+        <addForeignKeyConstraint baseColumnNames="CANDY_SHOP_ID" baseTableName="INGREDIENT"
+                                 constraintName="FK_INGREDIENT_ON_CANDY_SHOP" referencedColumnNames="ID"
+                                 referencedTableName="CANDY_SHOP"/>
+    </changeSet>
+    <changeSet id="10" author="CandyShop">
+        <createIndex indexName="IDX_INGREDIENT_FLOW_SHEET_ID" tableName="INGREDIENT">
+            <column name="FLOW_SHEET_ID"/>
+        </createIndex>
+
+        <addForeignKeyConstraint baseColumnNames="FLOW_SHEET_ID" baseTableName="INGREDIENT"
+                                 constraintName="FK_INGREDIENT_ON_FLOW_SHEET" referencedColumnNames="ID"
+                                 referencedTableName="FLOW_SHEET"/>
+    </changeSet>
+    <changeSet id="11" author="CandyShop">
+        <createIndex indexName="IDX_ORDER_CANDY_SHOP_ID" tableName="ORDER_">
+            <column name="CANDY_SHOP_ID"/>
+        </createIndex>
+
+        <addForeignKeyConstraint baseColumnNames="CANDY_SHOP_ID" baseTableName="ORDER_"
+                                 constraintName="FK_ORDER__ON_CANDY_SHOP" referencedColumnNames="ID"
+                                 referencedTableName="CANDY_SHOP"/>
+    </changeSet>
+    <changeSet id="12" author="CandyShop">
+        <createIndex indexName="IDX_PURCHASE_CANDY_SHOP_ID" tableName="PURCHASE">
+            <column name="CANDY_SHOP_ID"/>
+        </createIndex>
+
+        <addForeignKeyConstraint baseColumnNames="CANDY_SHOP_ID" baseTableName="PURCHASE"
+                                 constraintName="FK_PURCHASE_ON_CANDY_SHOP" referencedColumnNames="ID"
+                                 referencedTableName="CANDY_SHOP"/>
+    </changeSet>
+</databaseChangeLog>
