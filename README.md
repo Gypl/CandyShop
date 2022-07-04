@@ -3,4 +3,4 @@
 Вариант 10.
 Релизованы связи сущностей.
 
-![image](https://user-images.githubusercontent.com/55764206/177151375-18706b70-2de3-4c02-9011-df406a85fd95.png)
+![image](https://user-images.githubusercontent.com/55764206/177152173-7ab2eb9f-70bb-4b2f-ac73-ee389cffbc40.png)
