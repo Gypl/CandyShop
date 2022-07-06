@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://jmix.io/schema/ui/window"
+        xmlns:c="http://jmix.io/schema/ui/jpql-condition"
+        caption="msg://candyShopBrowse.caption"
+        focusComponent="candyShopsTable">
+    <data readOnly="true">
+        <collection id="candyShopsDc"
+                    class="com.company.candyshop.entity.CandyShop">
+            <fetchPlan extends="_base">
+                <property name="flowSheets" fetchPlan="_base">
+                    <property name="ingredients" fetchPlan="_base"/>
+                </property>
+                <property name="resources" fetchPlan="_base"/>
+                <property name="confectioneries" fetchPlan="_base"/>
+                <property name="purchases" fetchPlan="_base"/>
+                <property name="orders" fetchPlan="_base">
+                    <property name="orederedConfectioneries" fetchPlan="_base"/>
+                </property>
+            </fetchPlan>
+            <loader id="candyShopsDl">
+                <query>
+                    <![CDATA[select e from CandyShop e]]>
+                </query>
+            </loader>
+        </collection>
+    </data>
+    <facets>
+        <dataLoadCoordinator auto="true"/>
+        <screenSettings id="settingsFacet" auto="true"/>
+    </facets>
+    <actions>
+        <action id="lookupSelectAction"
+                caption="msg:///actions.Select"
+                icon="LOOKUP_OK"
+                primary="true"
+                shortcut="${COMMIT_SHORTCUT}"/>
+        <action id="lookupCancelAction"
+                caption="msg:///actions.Cancel"
+                icon="LOOKUP_CANCEL"/>
+    </actions>
+    <dialogMode height="600"
+                width="800"/>
+    <layout expand="candyShopsTable" spacing="true">
+        <filter id="filter"
+                dataLoader="candyShopsDl">
+            <properties include=".*"/>
+        </filter>
+        <groupTable id="candyShopsTable"
+                    width="100%"
+                    dataContainer="candyShopsDc">
+            <actions>
+                <action id="create" type="create"/>
+                <action id="edit" type="edit"/>
+                <action id="remove" type="remove"/>
+            </actions>
+            <columns>
+            </columns>
+            <simplePagination/>
+            <buttonsPanel id="buttonsPanel"
+                          alwaysVisible="true">
+                <button id="createBtn" action="candyShopsTable.create"/>
+                <button id="editBtn" action="candyShopsTable.edit"/>
+                <button id="removeBtn" action="candyShopsTable.remove"/>
+            </buttonsPanel>
+        </groupTable>
+        <hbox id="lookupActions" spacing="true" visible="false">
+            <button action="lookupSelectAction"/>
+            <button action="lookupCancelAction"/>
+        </hbox>
+    </layout>
+</window>
