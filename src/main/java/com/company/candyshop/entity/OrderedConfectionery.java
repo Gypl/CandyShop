@@ -1,50 +1,48 @@
 package com.company.candyshop.entity;
 
 import io.jmix.core.entity.annotation.JmixGeneratedValue;
-import io.jmix.core.metamodel.annotation.Composition;
 import io.jmix.core.metamodel.annotation.JmixEntity;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.util.List;
 import java.util.UUID;
 
 @JmixEntity
-@Table(name = "FLOW_SHEET", indexes = {
-        @Index(name = "IDX_FLOWSHEET_CANDY_SHOP_ID", columnList = "CANDY_SHOP_ID")
+@Table(name = "ORDERED_CONFECTIONERY", indexes = {
+        @Index(name = "IDX_ORDEREDCONFECTIONERY", columnList = "ORDER_ID")
 })
 @Entity
-public class FlowSheet {
+public class OrderedConfectionery {
     @JmixGeneratedValue
     @Column(name = "ID", nullable = false)
     @Id
     private UUID id;
 
-    @Column(name = "CONFECTIONERY_NAME", nullable = false, unique = true)
+    @Column(name = "CONFECTIONERY_NAME", nullable = false)
     @NotNull
     private String confectioneryName;
 
-    @Composition
-    @OneToMany(mappedBy = "flowSheet")
-    private List<Ingredient> ingredients;
-    @JoinColumn(name = "CANDY_SHOP_ID", nullable = false)
+    @Column(name = "NUMBER_", nullable = false)
+    @NotNull
+    private Integer number;
+    @JoinColumn(name = "ORDER_ID", nullable = false)
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    private CandyShop candyShop;
+    private Order order;
 
-    public CandyShop getCandyShop() {
-        return candyShop;
+    public Order getOrder() {
+        return order;
     }
 
-    public void setCandyShop(CandyShop candyShop) {
-        this.candyShop = candyShop;
+    public void setOrder(Order order) {
+        this.order = order;
     }
 
-    public List<Ingredient> getIngredients() {
-        return ingredients;
+    public Integer getNumber() {
+        return number;
     }
 
-    public void setIngredients(List<Ingredient> ingredients) {
-        this.ingredients = ingredients;
+    public void setNumber(Integer number) {
+        this.number = number;
     }
 
     public String getConfectioneryName() {

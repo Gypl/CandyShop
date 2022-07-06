@@ -1,10 +1,12 @@
 package com.company.candyshop.entity;
 
 import io.jmix.core.entity.annotation.JmixGeneratedValue;
+import io.jmix.core.metamodel.annotation.Composition;
 import io.jmix.core.metamodel.annotation.JmixEntity;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.List;
 import java.util.UUID;
 
 @JmixEntity
@@ -18,22 +20,21 @@ public class Order {
     @Id
     private UUID id;
 
-    @Column(name = "ORDER_NUMBER", nullable = false)
+    @Column(name = "ORDER_NUMBER", nullable = false, unique = true)
     @NotNull
     private Long orderNumber;
 
-    @Column(name = "CONFECTIONERY_NAME", nullable = false)
-    @NotNull
-    private String confectioneryName;
+    @Composition
+    @OneToMany(mappedBy = "order")
+    private List<OrderedConfectionery> orederedConfectioneries;
 
     @Column(name = "START_READY")
     private Boolean startReady;
 
-    @Column(name = "SERVR_READY")
-    private Boolean servrReady;
-
-    @JoinColumn(name = "CANDY_SHOP_ID")
-    @ManyToOne(fetch = FetchType.LAZY)
+    @Column(name = "SERVE_READY")
+    private Boolean serveReady;
+    @JoinColumn(name = "CANDY_SHOP_ID", nullable = false)
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
     private CandyShop candyShop;
 
     public CandyShop getCandyShop() {
@@ -44,28 +45,20 @@ public class Order {
         this.candyShop = candyShop;
     }
 
-    public void setStartReady(Boolean startReady) {
-        this.startReady = startReady;
+    public List<OrderedConfectionery> getOrederedConfectioneries() {
+        return orederedConfectioneries;
     }
 
-    public Boolean getServrReady() {
-        return servrReady;
+    public void setOrederedConfectioneries(List<OrderedConfectionery> orederedConfectioneries) {
+        this.orederedConfectioneries = orederedConfectioneries;
     }
 
-    public void setServrReady(Boolean servrReady) {
-        this.servrReady = servrReady;
+    public Boolean getServeReady() {
+        return serveReady;
     }
 
     public Boolean getStartReady() {
         return startReady;
-    }
-
-    public String getConfectioneryName() {
-        return confectioneryName;
-    }
-
-    public void setConfectioneryName(String confectioneryName) {
-        this.confectioneryName = confectioneryName;
     }
 
     public Long getOrderNumber() {

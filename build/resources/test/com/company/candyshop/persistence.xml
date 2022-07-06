@@ -12,6 +12,7 @@
     <class>com.company.candyshop.entity.CandyShop</class>
     <class>io.jmix.securitydata.entity.ResourceRoleEntity</class>
     <class>com.company.candyshop.entity.Purchase</class>
+    <class>com.company.candyshop.entity.Resource</class>
     <class>io.jmix.data.entity.ReferenceToEntity</class>
     <class>io.jmix.securitydata.entity.RowLevelRoleEntity</class>
     <class>io.jmix.uidata.entity.UiTablePresentation</class>
@@ -20,6 +21,7 @@
     <class>io.jmix.uidata.entity.FilterConditionConverter</class>
     <class>com.company.candyshop.entity.Order</class>
     <class>com.company.candyshop.entity.Ingredient</class>
+    <class>com.company.candyshop.entity.OrderedConfectionery</class>
     <class>io.jmix.core.entity.FileRefConverter</class>
     <class>io.jmix.securitydata.entity.ResourcePolicyEntity</class>
     <class>io.jmix.uidata.entity.FilterConfiguration</class>

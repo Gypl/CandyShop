@@ -1,7 +1,6 @@
 package com.company.candyshop.entity;
 
 import io.jmix.core.entity.annotation.JmixGeneratedValue;
-import io.jmix.core.metamodel.annotation.InstanceName;
 import io.jmix.core.metamodel.annotation.JmixEntity;
 
 import javax.persistence.*;
@@ -19,17 +18,15 @@ public class Confectionery {
     @Id
     private UUID id;
 
-    @InstanceName
-    @Column(name = "NAME", nullable = false)
+    @Column(name = "CONFECRIONERY_NAME", nullable = false)
     @NotNull
-    private String name;
+    private String confecrioneryName;
 
     @Column(name = "NUMBER_", nullable = false)
     @NotNull
     private Integer number;
-
-    @JoinColumn(name = "CANDY_SHOP_ID")
-    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "CANDY_SHOP_ID", nullable = false)
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
     private CandyShop candyShop;
 
     public CandyShop getCandyShop() {
@@ -48,12 +45,12 @@ public class Confectionery {
         this.number = number;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public String getConfecrioneryName() {
+        return confecrioneryName;
     }
 
-    public String getName() {
-        return name;
+    public void setConfecrioneryName(String confecrioneryName) {
+        this.confecrioneryName = confecrioneryName;
     }
 
     public UUID getId() {

@@ -1,6 +1,7 @@
 package com.company.candyshop.entity;
 
 import io.jmix.core.entity.annotation.JmixGeneratedValue;
+import io.jmix.core.metamodel.annotation.Composition;
 import io.jmix.core.metamodel.annotation.JmixEntity;
 
 import javax.persistence.*;
@@ -16,59 +17,64 @@ public class CandyShop {
     @Id
     private UUID id;
 
+    @Composition
     @OneToMany(mappedBy = "candyShop")
-    private List<FlowSheet> flowSheetList;
+    private List<FlowSheet> flowSheets;
 
+    @Composition
     @OneToMany(mappedBy = "candyShop")
-    private List<Ingredient> ingredientList;
+    private List<Resource> resources;
 
+    @Composition
     @OneToMany(mappedBy = "candyShop")
-    private List<Confectionery> confectioneryList;
+    private List<Confectionery> confectioneries;
 
+    @Composition
     @OneToMany(mappedBy = "candyShop")
-    private List<Purchase> purchaseList;
+    private List<Purchase> purchases;
 
+    @Composition
     @OneToMany(mappedBy = "candyShop")
-    private List<Order> orderList;
+    private List<Order> orders;
 
-    public List<Order> getOrderList() {
-        return orderList;
+    public List<Order> getOrders() {
+        return orders;
     }
 
-    public void setOrderList(List<Order> orderList) {
-        this.orderList = orderList;
+    public void setOrders(List<Order> orders) {
+        this.orders = orders;
     }
 
-    public List<Purchase> getPurchaseList() {
-        return purchaseList;
+    public List<Purchase> getPurchases() {
+        return purchases;
     }
 
-    public void setPurchaseList(List<Purchase> purchaseList) {
-        this.purchaseList = purchaseList;
+    public void setPurchases(List<Purchase> purchases) {
+        this.purchases = purchases;
     }
 
-    public List<Confectionery> getConfectioneryList() {
-        return confectioneryList;
+    public List<Confectionery> getConfectioneries() {
+        return confectioneries;
     }
 
-    public void setConfectioneryList(List<Confectionery> confectioneryList) {
-        this.confectioneryList = confectioneryList;
+    public void setConfectioneries(List<Confectionery> confectioneries) {
+        this.confectioneries = confectioneries;
     }
 
-    public List<Ingredient> getIngredientList() {
-        return ingredientList;
+    public List<Resource> getResources() {
+        return resources;
     }
 
-    public void setIngredientList(List<Ingredient> ingredientList) {
-        this.ingredientList = ingredientList;
+    public void setResources(List<Resource> resources) {
+        this.resources = resources;
     }
 
-    public List<FlowSheet> getFlowSheetList() {
-        return flowSheetList;
+    public List<FlowSheet> getFlowSheets() {
+        return flowSheets;
     }
 
-    public void setFlowSheetList(List<FlowSheet> flowSheetList) {
-        this.flowSheetList = flowSheetList;
+    public void setFlowSheets(List<FlowSheet> flowSheets) {
+        this.flowSheets = flowSheets;
     }
 
     public UUID getId() {

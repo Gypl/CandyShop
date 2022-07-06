@@ -1,7 +1,6 @@
 package com.company.candyshop.entity;
 
 import io.jmix.core.entity.annotation.JmixGeneratedValue;
-import io.jmix.core.metamodel.annotation.InstanceName;
 import io.jmix.core.metamodel.annotation.JmixEntity;
 
 import javax.persistence.*;
@@ -9,20 +8,19 @@ import javax.validation.constraints.NotNull;
 import java.util.UUID;
 
 @JmixEntity
-@Table(name = "PURCHASE", indexes = {
-        @Index(name = "IDX_PURCHASE_CANDY_SHOP_ID", columnList = "CANDY_SHOP_ID")
+@Table(name = "RESOURCE_", indexes = {
+        @Index(name = "IDX_RESOURCE_CANDY_SHOP_ID", columnList = "CANDY_SHOP_ID")
 })
-@Entity
-public class Purchase {
+@Entity(name = "Resource_")
+public class Resource {
     @JmixGeneratedValue
     @Column(name = "ID", nullable = false)
     @Id
     private UUID id;
 
-    @InstanceName
-    @Column(name = "NAME", nullable = false)
+    @Column(name = "RESOURCE_NAME", nullable = false, unique = true)
     @NotNull
-    private String name;
+    private String resourceName;
 
     @Column(name = "AMOUNT", nullable = false)
     @NotNull
@@ -59,12 +57,12 @@ public class Purchase {
         this.amount = amount;
     }
 
-    public String getName() {
-        return name;
+    public String getResourceName() {
+        return resourceName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setResourceName(String resourceName) {
+        this.resourceName = resourceName;
     }
 
     public UUID getId() {
