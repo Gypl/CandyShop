@@ -2,6 +2,42 @@
 <project version="4">
   <component name="JmixDataStoreSettingsManager">
     <moduleSettings>
+      <entry key="CandyShop.main">
+        <ModuleSettings>
+          <option name="dataStoreOptions">
+            <map>
+              <entry key="main">
+                <value>
+                  <DataStoreSettings>
+                    <option name="generateDdlType" value="CREATE_AND_UPDATE" />
+                    <option name="supportedTypes">
+                      <option value="hsql" />
+                    </option>
+                  </DataStoreSettings>
+                </value>
+              </entry>
+            </map>
+          </option>
+          <option name="dataStores">
+            <map>
+              <entry key="main">
+                <value>
+                  <DataStore>
+                    <SavedDbProperties>
+                      <option name="databaseName" value="CandyShop" />
+                      <option name="dbType" value="hsqlfile" />
+                      <option name="dbmsVersion" />
+                      <option name="host" value=".jmix/hsqldb" />
+                      <option name="url" value="jdbc:hsqldb:file:.jmix/hsqldb/CandyShop" />
+                      <option name="user" value="sa" />
+                    </SavedDbProperties>
+                  </DataStore>
+                </value>
+              </entry>
+            </map>
+          </option>
+        </ModuleSettings>
+      </entry>
       <entry key="com.company.CandyShop.main">
         <ModuleSettings>
           <option name="dataStoreOptions">
