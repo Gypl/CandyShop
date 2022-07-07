@@ -8,6 +8,7 @@ import io.jmix.core.metamodel.annotation.InstanceName;
 import io.jmix.core.metamodel.annotation.JmixEntity;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
@@ -16,11 +17,15 @@ import java.util.UUID;
 @Table(name = "CANDY_SHOP")
 @Entity
 public class CandyShop {
-    @InstanceName
     @JmixGeneratedValue
     @Column(name = "ID", nullable = false)
     @Id
     private UUID id;
+
+    @InstanceName
+    @Column(name = "NAME", nullable = false, unique = true)
+    @NotNull
+    private String name;
 
     @Composition
     @OneToMany(mappedBy = "candyShop")
@@ -50,6 +55,14 @@ public class CandyShop {
     @Column(name = "DELETED_DATE")
     @Temporal(TemporalType.TIMESTAMP)
     private Date deletedDate;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 
     public Date getDeletedDate() {
         return deletedDate;

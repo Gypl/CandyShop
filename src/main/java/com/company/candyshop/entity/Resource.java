@@ -17,12 +17,12 @@ import java.util.UUID;
 })
 @Entity(name = "Resource_")
 public class Resource {
-    @InstanceName
     @JmixGeneratedValue
     @Column(name = "ID", nullable = false)
     @Id
     private UUID id;
 
+    @InstanceName
     @Column(name = "RESOURCE_NAME", nullable = false, unique = true)
     @NotNull
     private String resourceName;
