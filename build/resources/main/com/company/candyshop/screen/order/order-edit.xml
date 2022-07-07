@@ -34,6 +34,9 @@
                 <textField id="orderNumberField" property="orderNumber"/>
                 <checkBox id="startReadyField" property="startReady"/>
                 <checkBox id="serveReadyField" property="serveReady"/>
+                <hbox>
+                    <button id="serveReadyButton" />
+                </hbox>
                 <entityPicker id="candyShopField" property="candyShop">
                     <actions>
                         <action id="entityLookup" type="entity_lookup"/>

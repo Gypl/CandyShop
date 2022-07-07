@@ -2,7 +2,7 @@
 
 Релизованы связи сущностей.
 
-![image](https://user-images.githubusercontent.com/55764206/177639890-0584ae3c-19cb-4e45-a078-ebd7a9eb6cbc.png)
+![img.png](img.png)
 
 - [X] Разработать следующие сущности и атрибуты:
 
