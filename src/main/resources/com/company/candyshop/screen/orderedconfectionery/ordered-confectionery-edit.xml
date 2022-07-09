@@ -5,11 +5,7 @@
     <data>
         <instance id="orderedConfectioneryDc"
                   class="com.company.candyshop.entity.OrderedConfectionery">
-            <fetchPlan extends="_base">
-                <property name="order" fetchPlan="_base">
-                    <property name="candyShop" fetchPlan="_base"/>
-                </property>
-            </fetchPlan>
+            <fetchPlan extends="_base"/>
             <loader/>
         </instance>
     </data>
@@ -31,14 +27,13 @@
     <layout spacing="true" expand="editActions">
         <form id="form" dataContainer="orderedConfectioneryDc">
             <column width="350px">
-                <textField id="confectioneryNameField" property="confectioneryName"/>
-                <textField id="numberField" property="number"/>
-                <entityPicker id="orderField" property="order">
+                <entityPicker id="confectioneryNameField" property="confectioneryName">
                     <actions>
                         <action id="entityLookup" type="entity_lookup"/>
                         <action id="entityClear" type="entity_clear"/>
                     </actions>
                 </entityPicker>
+                <textField id="numberField" property="number"/>
             </column>
         </form>
         <hbox id="editActions" spacing="true">

@@ -29,7 +29,12 @@
     <layout spacing="true" expand="editActions">
         <form id="form" dataContainer="confectioneryDc">
             <column width="350px">
-                <textField id="confecrioneryNameField" property="confecrioneryName"/>
+                <entityPicker id="confecrioneryNameField" property="confecrioneryName">
+                    <actions>
+                        <action id="entityLookup" type="entity_lookup"/>
+                        <action id="entityClear" type="entity_clear"/>
+                    </actions>
+                </entityPicker>
                 <textField id="numberField" property="number"/>
                 <entityPicker id="candyShopField" property="candyShop">
                     <actions>

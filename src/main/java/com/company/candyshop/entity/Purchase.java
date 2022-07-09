@@ -2,6 +2,8 @@ package com.company.candyshop.entity;
 
 import io.jmix.core.annotation.DeletedBy;
 import io.jmix.core.annotation.DeletedDate;
+import io.jmix.core.entity.annotation.CaseConversion;
+import io.jmix.core.entity.annotation.ConversionType;
 import io.jmix.core.entity.annotation.JmixGeneratedValue;
 import io.jmix.core.metamodel.annotation.InstanceName;
 import io.jmix.core.metamodel.annotation.JmixEntity;
@@ -22,6 +24,7 @@ public class Purchase {
     @Id
     private UUID id;
 
+    @CaseConversion(type = ConversionType.LOWER)
     @InstanceName
     @Column(name = "NAME", nullable = false)
     @NotNull

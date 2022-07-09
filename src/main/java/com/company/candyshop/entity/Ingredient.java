@@ -2,6 +2,8 @@ package com.company.candyshop.entity;
 
 import io.jmix.core.annotation.DeletedBy;
 import io.jmix.core.annotation.DeletedDate;
+import io.jmix.core.entity.annotation.CaseConversion;
+import io.jmix.core.entity.annotation.ConversionType;
 import io.jmix.core.entity.annotation.JmixGeneratedValue;
 import io.jmix.core.metamodel.annotation.InstanceName;
 import io.jmix.core.metamodel.annotation.JmixEntity;
@@ -22,15 +24,17 @@ public class Ingredient {
     @Id
     private UUID id;
 
-    @InstanceName
-    @Column(name = "INGREDIENT_NAME", nullable = false, unique = true)
+    @JoinColumn(name = "INGREDIENT_NAME_ID", nullable = false)
     @NotNull
-    private String ingredientName;
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @InstanceName
+    private Resource ingredientName;
 
     @NotNull
     @Column(name = "NUMBER_", nullable = false)
     private Double amount;
 
+    @CaseConversion(type = ConversionType.LOWER)
     @Column(name = "DIMENSION", nullable = false)
     @NotNull
     private String dimension;
@@ -47,6 +51,14 @@ public class Ingredient {
     @Column(name = "DELETED_DATE")
     @Temporal(TemporalType.TIMESTAMP)
     private Date deletedDate;
+
+    public void setIngredientName(Resource ingredientName) {
+        this.ingredientName = ingredientName;
+    }
+
+    public Resource getIngredientName() {
+        return ingredientName;
+    }
 
     public Date getDeletedDate() {
         return deletedDate;
@@ -86,14 +98,6 @@ public class Ingredient {
 
     public void setAmount(Double amount) {
         this.amount = amount;
-    }
-
-    public String getIngredientName() {
-        return ingredientName;
-    }
-
-    public void setIngredientName(String ingredientName) {
-        this.ingredientName = ingredientName;
     }
 
     public UUID getId() {

@@ -22,10 +22,11 @@ public class Confectionery {
     @Id
     private UUID id;
 
-    @InstanceName
-    @Column(name = "CONFECRIONERY_NAME", nullable = false)
+    @OneToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "CONFECRIONERY_NAME_ID", nullable = false)
     @NotNull
-    private String confecrioneryName;
+    @InstanceName
+    private FlowSheet confecrioneryName;
 
     @Column(name = "NUMBER_", nullable = false)
     @NotNull
@@ -43,6 +44,14 @@ public class Confectionery {
     @Column(name = "DELETED_DATE")
     @Temporal(TemporalType.TIMESTAMP)
     private Date deletedDate;
+
+    public void setConfecrioneryName(FlowSheet confecrioneryName) {
+        this.confecrioneryName = confecrioneryName;
+    }
+
+    public FlowSheet getConfecrioneryName() {
+        return confecrioneryName;
+    }
 
     public Date getDeletedDate() {
         return deletedDate;
@@ -74,14 +83,6 @@ public class Confectionery {
 
     public void setNumber(Integer number) {
         this.number = number;
-    }
-
-    public String getConfecrioneryName() {
-        return confecrioneryName;
-    }
-
-    public void setConfecrioneryName(String confecrioneryName) {
-        this.confecrioneryName = confecrioneryName;
     }
 
     public UUID getId() {

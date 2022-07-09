@@ -5,11 +5,7 @@
     <data>
         <instance id="ingredientDc"
                   class="com.company.candyshop.entity.Ingredient">
-            <fetchPlan extends="_base">
-                <property name="flowSheet" fetchPlan="_base">
-                    <property name="candyShop" fetchPlan="_base"/>
-                </property>
-            </fetchPlan>
+            <fetchPlan extends="_base"/>
             <loader/>
         </instance>
     </data>
@@ -31,15 +27,14 @@
     <layout spacing="true" expand="editActions">
         <form id="form" dataContainer="ingredientDc">
             <column width="350px">
-                <textField id="ingredientNameField" property="ingredientName"/>
-                <textField id="amountField" property="amount"/>
-                <textField id="dimensionField" property="dimension"/>
-                <entityPicker id="flowSheetField" property="flowSheet">
+                <entityPicker id="ingredientNameField" property="ingredientName">
                     <actions>
                         <action id="entityLookup" type="entity_lookup"/>
                         <action id="entityClear" type="entity_clear"/>
                     </actions>
                 </entityPicker>
+                <textField id="amountField" property="amount"/>
+                <textField id="dimensionField" property="dimension"/>
             </column>
         </form>
         <hbox id="editActions" spacing="true">
