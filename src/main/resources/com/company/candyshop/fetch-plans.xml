@@ -1,3 +1,14 @@
 <fetchPlans xmlns="http://jmix.io/schema/core/fetch-plans">
     <fetchPlan entity="Order_" name="order-max-number" extends="_base"/>
+    <fetchPlan entity="FlowSheet" name="flowSheet-confectioneryName-fetch" extends="_base">
+        <property name="ingredients" fetchPlan="_base"/>
+    </fetchPlan>
+    <fetchPlan entity="Confectionery" name="confectionery-fetch-plan" extends="_base">
+    </fetchPlan>
+    <fetchPlan entity="Resource_" name="resource-fetch-plan" extends="_base"/>
+    <fetchPlan entity="OrderedConfectionery" name="orderedConfectionery-fetch-plan" extends="_base">
+        <property name="confectioneryName" fetchPlan="_instance_name">
+            <property name="ingredients" fetchPlan="_base"/>
+        </property>
+    </fetchPlan>
 </fetchPlans>

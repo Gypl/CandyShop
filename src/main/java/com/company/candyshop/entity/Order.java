@@ -52,6 +52,14 @@ public class Order {
     @Temporal(TemporalType.TIMESTAMP)
     private Date deletedDate;
 
+    public void setServeReady(Boolean serveReady) {
+        this.serveReady = serveReady;
+    }
+
+    public void setStartReady(Boolean startReady) {
+        this.startReady = startReady;
+    }
+
     public Date getDeletedDate() {
         return deletedDate;
     }
