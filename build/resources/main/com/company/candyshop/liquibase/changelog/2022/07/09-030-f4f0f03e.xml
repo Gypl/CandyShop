@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.5.xsd"
+        objectQuotingStrategy="QUOTE_ONLY_RESERVED_WORDS">
+    <changeSet id="1" author="CandyShop">
+        <addColumn tableName="CONFECTIONERY">
+            <column name="CONFECRIONERY_NAME_ID" type="UUID"/>
+        </addColumn>
+
+        <addNotNullConstraint columnName="CONFECRIONERY_NAME_ID" tableName="CONFECTIONERY"/>
+    </changeSet>
+    <changeSet id="2" author="CandyShop">
+        <addColumn tableName="ORDERED_CONFECTIONERY">
+            <column name="CONFECTIONERY_NAME_ID" type="UUID"/>
+        </addColumn>
+
+        <addNotNullConstraint columnName="CONFECTIONERY_NAME_ID" tableName="ORDERED_CONFECTIONERY"/>
+    </changeSet>
+    <changeSet id="3" author="CandyShop">
+        <createIndex indexName="IDX_UC_ORDEREDCONFEC_CONFECTIONERY" tableName="ORDERED_CONFECTIONERY" unique="true">
+            <column name="CONFECTIONERY_NAME_ID"/>
+            <column name="DELETED_DATE"/>
+        </createIndex>
+    </changeSet>
+    <changeSet id="4" author="CandyShop">
+        <addForeignKeyConstraint baseColumnNames="CONFECRIONERY_NAME_ID" baseTableName="CONFECTIONERY"
+                                 constraintName="FK_CONFECTIONE_ON_CONFECRIONE" referencedColumnNames="ID"
+                                 referencedTableName="FLOW_SHEET"/>
+    </changeSet>
+    <changeSet id="5" author="CandyShop">
+        <addForeignKeyConstraint baseColumnNames="CONFECTIONERY_NAME_ID" baseTableName="ORDERED_CONFECTIONERY"
+                                 constraintName="FK_ORDEREDCONF_ON_CONFECTIONE" referencedColumnNames="ID"
+                                 referencedTableName="FLOW_SHEET"/>
+    </changeSet>
+    <changeSet id="6" author="CandyShop">
+        <dropColumn columnName="CONFECRIONERY_NAME" tableName="CONFECTIONERY"/>
+    </changeSet>
+    <changeSet id="7" author="CandyShop">
+        <dropColumn columnName="CONFECTIONERY_NAME" tableName="ORDERED_CONFECTIONERY"/>
+    </changeSet>
+</databaseChangeLog>

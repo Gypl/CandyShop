@@ -1,0 +1,3 @@
+<fetchPlans xmlns="http://jmix.io/schema/core/fetch-plans">
+    <fetchPlan entity="Order_" name="order-max-number" extends="_base"/>
+</fetchPlans>
