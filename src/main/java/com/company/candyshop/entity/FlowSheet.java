@@ -19,12 +19,12 @@ import java.util.UUID;
 })
 @Entity
 public class FlowSheet {
-    @InstanceName
     @JmixGeneratedValue
     @Column(name = "ID", nullable = false)
     @Id
     private UUID id;
 
+    @InstanceName
     @Column(name = "CONFECTIONERY_NAME", nullable = false, unique = true)
     @NotNull
     private String confectioneryName;

@@ -2,8 +2,13 @@
 <menu-config xmlns="http://jmix.io/schema/ui/menu">
 
     <menu id="application" caption="msg://com.company.candyshop/menu.application" insertBefore="administration">
-        <item screen="User.browse" caption="msg://com.company.candyshop.screen.user/UserBrowse.caption"/>
         <item screen="themeSettingsScreen" caption="msg://io.jmix.ui.app.themesettings/themeSettings.caption"/>
+        <item screen="CandyShop.browse" caption="msg://com.company.candyshop.screen.candyshop/candyShopBrowse.menu"/>
+        <item screen="FlowSheet.browse" caption="msg://com.company.candyshop.screen.flowsheet/flowSheetBrowse.menu"/>
+        <item screen="Resource_.browse" caption="msg://com.company.candyshop.screen.resource/resourceBrowse.menu"/>
+        <item screen="Confectionery.browse" caption="msg://com.company.candyshop.screen.confectionery/confectioneryBrowse.menu"/>
+        <item screen="Purchase.browse" caption="msg://com.company.candyshop.screen.purchase/purchaseBrowse.menu"/>
+        <item screen="Order_.browse" caption="msg://com.company.candyshop.screen.order/orderBrowse.menu"/>
     </menu>
 
 </menu-config>

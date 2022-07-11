@@ -2,6 +2,7 @@ package com.company.candyshop.entity;
 
 import io.jmix.core.annotation.DeletedBy;
 import io.jmix.core.annotation.DeletedDate;
+import io.jmix.core.entity.annotation.CaseConversion;
 import io.jmix.core.entity.annotation.JmixGeneratedValue;
 import io.jmix.core.metamodel.annotation.InstanceName;
 import io.jmix.core.metamodel.annotation.JmixEntity;
@@ -17,12 +18,13 @@ import java.util.UUID;
 })
 @Entity(name = "Resource_")
 public class Resource {
-    @InstanceName
     @JmixGeneratedValue
     @Column(name = "ID", nullable = false)
     @Id
     private UUID id;
 
+    @CaseConversion(type = io.jmix.core.entity.annotation.ConversionType.LOWER)
+    @InstanceName
     @Column(name = "RESOURCE_NAME", nullable = false, unique = true)
     @NotNull
     private String resourceName;

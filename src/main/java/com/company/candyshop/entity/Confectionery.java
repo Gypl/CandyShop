@@ -17,15 +17,16 @@ import java.util.UUID;
 })
 @Entity
 public class Confectionery {
-    @InstanceName
     @JmixGeneratedValue
     @Column(name = "ID", nullable = false)
     @Id
     private UUID id;
 
-    @Column(name = "CONFECRIONERY_NAME", nullable = false)
+    @OneToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "CONFECRIONERY_NAME_ID", nullable = false)
     @NotNull
-    private String confecrioneryName;
+    @InstanceName
+    private FlowSheet confectioneryName;
 
     @Column(name = "NUMBER_", nullable = false)
     @NotNull
@@ -43,6 +44,14 @@ public class Confectionery {
     @Column(name = "DELETED_DATE")
     @Temporal(TemporalType.TIMESTAMP)
     private Date deletedDate;
+
+    public void setConfectioneryName(FlowSheet confectioneryName) {
+        this.confectioneryName = confectioneryName;
+    }
+
+    public FlowSheet getConfectioneryName() {
+        return confectioneryName;
+    }
 
     public Date getDeletedDate() {
         return deletedDate;
@@ -74,14 +83,6 @@ public class Confectionery {
 
     public void setNumber(Integer number) {
         this.number = number;
-    }
-
-    public String getConfecrioneryName() {
-        return confecrioneryName;
-    }
-
-    public void setConfecrioneryName(String confecrioneryName) {
-        this.confecrioneryName = confecrioneryName;
     }
 
     public UUID getId() {

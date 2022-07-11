@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://jmix.io/schema/ui/window"
+        xmlns:c="http://jmix.io/schema/ui/jpql-condition"
+        caption="msg://confectioneryBrowse.caption"
+        focusComponent="confectioneriesTable">
+    <data readOnly="true">
+        <collection id="confectioneriesDc"
+                    class="com.company.candyshop.entity.Confectionery">
+            <fetchPlan extends="_base">
+                <property name="candyShop" fetchPlan="_base"/>
+            </fetchPlan>
+            <loader id="confectioneriesDl">
+                <query>
+                    <![CDATA[select e from Confectionery e]]>
+                </query>
+            </loader>
+        </collection>
+    </data>
+    <facets>
+        <dataLoadCoordinator auto="true"/>
+        <screenSettings id="settingsFacet" auto="true"/>
+    </facets>
+    <actions>
+        <action id="lookupSelectAction"
+                caption="msg:///actions.Select"
+                icon="LOOKUP_OK"
+                primary="true"
+                shortcut="${COMMIT_SHORTCUT}"/>
+        <action id="lookupCancelAction"
+                caption="msg:///actions.Cancel"
+                icon="LOOKUP_CANCEL"/>
+    </actions>
+    <dialogMode height="600"
+                width="800"/>
+    <layout expand="confectioneriesTable" spacing="true">
+        <filter id="filter"
+                dataLoader="confectioneriesDl">
+            <properties include=".*"/>
+        </filter>
+        <groupTable id="confectioneriesTable"
+                    width="100%"
+                    dataContainer="confectioneriesDc">
+            <actions>
+                <action id="create" type="create"/>
+                <action id="edit" type="edit"/>
+                <action id="remove" type="remove"/>
+            </actions>
+            <columns>
+                <column id="confectioneryName"/>
+                <column id="number"/>
+                <column id="candyShop"/>
+            </columns>
+            <simplePagination/>
+            <buttonsPanel id="buttonsPanel"
+                          alwaysVisible="true">
+                <button id="createBtn" action="confectioneriesTable.create"/>
+                <button id="editBtn" action="confectioneriesTable.edit"/>
+                <button id="removeBtn" action="confectioneriesTable.remove"/>
+            </buttonsPanel>
+        </groupTable>
+        <hbox id="lookupActions" spacing="true" visible="false">
+            <button action="lookupSelectAction"/>
+            <button action="lookupCancelAction"/>
+        </hbox>
+    </layout>
+</window>

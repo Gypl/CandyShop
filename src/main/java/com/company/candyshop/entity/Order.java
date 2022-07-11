@@ -19,12 +19,12 @@ import java.util.UUID;
 })
 @Entity(name = "Order_")
 public class Order {
-    @InstanceName
     @JmixGeneratedValue
     @Column(name = "ID", nullable = false)
     @Id
     private UUID id;
 
+    @InstanceName
     @Column(name = "ORDER_NUMBER", nullable = false, unique = true)
     @NotNull
     private Long orderNumber;
@@ -32,6 +32,16 @@ public class Order {
     @Composition
     @OneToMany(mappedBy = "order")
     private List<OrderedConfectionery> orederedConfectioneries;
+
+    @Column(name = "START_READY")
+    private Boolean startReady;
+
+    @Column(name = "SERVE_READY")
+    private Boolean serveReady;
+
+    @JoinColumn(name = "CANDY_SHOP_ID", nullable = false)
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    private CandyShop candyShop;
 
     @DeletedBy
     @Column(name = "DELETED_BY")
@@ -41,6 +51,14 @@ public class Order {
     @Column(name = "DELETED_DATE")
     @Temporal(TemporalType.TIMESTAMP)
     private Date deletedDate;
+
+    public void setServeReady(Boolean serveReady) {
+        this.serveReady = serveReady;
+    }
+
+    public void setStartReady(Boolean startReady) {
+        this.startReady = startReady;
+    }
 
     public Date getDeletedDate() {
         return deletedDate;
@@ -57,16 +75,6 @@ public class Order {
     public void setDeletedBy(String deletedBy) {
         this.deletedBy = deletedBy;
     }
-
-    @Column(name = "START_READY")
-    private Boolean startReady;
-
-    @Column(name = "SERVE_READY")
-    private Boolean serveReady;
-
-    @JoinColumn(name = "CANDY_SHOP_ID", nullable = false)
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    private CandyShop candyShop;
 
     public CandyShop getCandyShop() {
         return candyShop;

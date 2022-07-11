@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://jmix.io/schema/ui/window"
+        caption="msg://orderEdit.caption"
+        focusComponent="form">
+    <data>
+        <instance id="orderDc"
+                  class="com.company.candyshop.entity.Order">
+            <fetchPlan extends="_base">
+                <property name="orederedConfectioneries" fetchPlan="_base"/>
+                <property name="candyShop" fetchPlan="_base"/>
+            </fetchPlan>
+            <loader/>
+            <collection id="orederedConfectioneriesDc" property="orederedConfectioneries"/>
+        </instance>
+    </data>
+    <facets>
+        <dataLoadCoordinator auto="true"/>
+        <screenSettings id="settingsFacet" auto="true"/>
+    </facets>
+    <actions>
+        <action id="windowCommitAndClose" caption="msg:///actions.Ok"
+                icon="EDITOR_OK"
+                primary="true"
+                shortcut="${COMMIT_SHORTCUT}"/>
+        <action id="windowClose"
+                caption="msg:///actions.Close"
+                icon="EDITOR_CANCEL"/>
+        <action id="serveCheck"/>
+    </actions>
+    <dialogMode height="600"
+                width="800"/>
+    <layout spacing="true" expand="editActions">
+        <form id="form" dataContainer="orderDc">
+            <column width="350px">
+                <textField id="orderNumberField" property="orderNumber" editable="false"/>
+                <checkBox id="startReadyField" property="startReady" editable="false"/>
+                <hbox id="serveReadyBox" caption="msg://com.company.candyshop.entity/Order.serveReady">
+                    <checkBox id="serveReadyField" property="serveReady" editable="false"/>
+                    <button caption="msg://com.company.candyshop.entity/Order.serveReady.button" action="serveCheck"/>
+                </hbox>
+                <entityPicker id="candyShopField" property="candyShop">
+                    <actions>
+                        <action id="entityLookup" type="entity_lookup"/>
+                        <action id="entityClear" type="entity_clear"/>
+                    </actions>
+                </entityPicker>
+            </column>
+        </form>
+        <groupBox id="orederedConfectioneriesBox"
+                  caption="msg://com.company.candyshop.entity/Order.orederedConfectioneries">
+            <table id="orederedConfectioneriesTable" dataContainer="orederedConfectioneriesDc" width="100%"
+                   height="200px">
+                <actions>
+                    <action id="create" type="create"/>
+                    <action id="edit" type="edit"/>
+                    <action id="remove" type="remove"/>
+                </actions>
+                <columns>
+                    <column id="confectioneryName"/>
+                    <column id="number"/>
+                </columns>
+                <buttonsPanel>
+                    <button action="orederedConfectioneriesTable.create"/>
+                    <button action="orederedConfectioneriesTable.edit"/>
+                    <button action="orederedConfectioneriesTable.remove"/>
+                </buttonsPanel>
+            </table>
+        </groupBox>
+        <hbox id="editActions" spacing="true">
+            <button id="commitAndCloseBtn" action="windowCommitAndClose"/>
+            <button id="closeBtn" action="windowClose"/>
+        </hbox>
+    </layout>
+</window>

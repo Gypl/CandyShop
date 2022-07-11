@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://jmix.io/schema/ui/window"
+        caption="msg://flowSheetEdit.caption"
+        focusComponent="form">
+    <data>
+        <instance id="flowSheetDc"
+                  class="com.company.candyshop.entity.FlowSheet">
+            <fetchPlan extends="_base">
+                <property name="ingredients" fetchPlan="_base"/>
+                <property name="candyShop" fetchPlan="_base"/>
+            </fetchPlan>
+            <loader/>
+            <collection id="ingredientsDc" property="ingredients"/>
+        </instance>
+    </data>
+    <facets>
+        <dataLoadCoordinator auto="true"/>
+        <screenSettings id="settingsFacet" auto="true"/>
+    </facets>
+    <actions>
+        <action id="windowCommitAndClose" caption="msg:///actions.Ok"
+                icon="EDITOR_OK"
+                primary="true"
+                shortcut="${COMMIT_SHORTCUT}"/>
+        <action id="windowClose"
+                caption="msg:///actions.Close"
+                icon="EDITOR_CANCEL"/>
+    </actions>
+    <dialogMode height="600"
+                width="800"/>
+    <layout spacing="true" expand="editActions">
+        <form id="form" dataContainer="flowSheetDc">
+            <column width="350px">
+                <textField id="confectioneryNameField" property="confectioneryName"/>
+                <entityPicker id="candyShopField" property="candyShop">
+                    <actions>
+                        <action id="entityLookup" type="entity_lookup"/>
+                        <action id="entityClear" type="entity_clear"/>
+                    </actions>
+                </entityPicker>
+            </column>
+        </form>
+        <groupBox id="ingredientsBox" caption="msg://com.company.candyshop.entity/FlowSheet.ingredients">
+            <table id="ingredientsTable" dataContainer="ingredientsDc" width="100%" height="200px">
+                <actions>
+                    <action id="create" type="create"/>
+                    <action id="edit" type="edit"/>
+                    <action id="remove" type="remove"/>
+                </actions>
+                <columns>
+                    <column id="ingredientName"/>
+                    <column id="amount"/>
+                    <column id="dimension"/>
+                </columns>
+                <buttonsPanel>
+                    <button action="ingredientsTable.create"/>
+                    <button action="ingredientsTable.edit"/>
+                    <button action="ingredientsTable.remove"/>
+                </buttonsPanel>
+            </table>
+        </groupBox>
+        <hbox id="editActions" spacing="true">
+            <button id="commitAndCloseBtn" action="windowCommitAndClose"/>
+            <button id="closeBtn" action="windowClose"/>
+        </hbox>
+    </layout>
+</window>

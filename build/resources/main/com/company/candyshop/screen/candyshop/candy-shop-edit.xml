@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://jmix.io/schema/ui/window"
+        caption="msg://candyShopEdit.caption"
+        focusComponent="form">
+    <data>
+        <instance id="candyShopDc"
+                  class="com.company.candyshop.entity.CandyShop">
+            <fetchPlan extends="_base">
+                <property name="flowSheets" fetchPlan="_base">
+                    <property name="ingredients" fetchPlan="_base"/>
+                </property>
+                <property name="resources" fetchPlan="_base"/>
+                <property name="confectioneries" fetchPlan="_base"/>
+                <property name="purchases" fetchPlan="_base"/>
+                <property name="orders" fetchPlan="_base">
+                    <property name="orederedConfectioneries" fetchPlan="_base"/>
+                </property>
+            </fetchPlan>
+            <loader/>
+            <collection id="flowSheetsDc" property="flowSheets"/>
+            <collection id="resourcesDc" property="resources"/>
+            <collection id="confectioneriesDc" property="confectioneries"/>
+            <collection id="purchasesDc" property="purchases"/>
+            <collection id="ordersDc" property="orders"/>
+        </instance>
+    </data>
+    <facets>
+        <dataLoadCoordinator auto="true"/>
+        <screenSettings id="settingsFacet" auto="true"/>
+    </facets>
+    <actions>
+        <action id="windowCommitAndClose" caption="msg:///actions.Ok"
+                icon="EDITOR_OK"
+                primary="true"
+                shortcut="${COMMIT_SHORTCUT}"/>
+        <action id="windowClose"
+                caption="msg:///actions.Close"
+                icon="EDITOR_CANCEL"/>
+    </actions>
+    <dialogMode height="600"
+                width="800"/>
+    <layout spacing="true" expand="editActions">
+        <form id="form" dataContainer="candyShopDc">
+            <column width="350px">
+                <textField id="nameField" property="name"/>
+            </column>
+        </form>
+        <groupBox id="flowSheetsBox" caption="msg://com.company.candyshop.entity/CandyShop.flowSheets">
+            <table id="flowSheetsTable" dataContainer="flowSheetsDc" width="100%" height="200px">
+                <actions>
+                    <action id="create" type="create"/>
+                    <action id="edit" type="edit"/>
+                    <action id="remove" type="remove"/>
+                </actions>
+                <columns>
+                    <column id="confectioneryName"/>
+                </columns>
+                <buttonsPanel>
+                    <button action="flowSheetsTable.create"/>
+                    <button action="flowSheetsTable.edit"/>
+                    <button action="flowSheetsTable.remove"/>
+                </buttonsPanel>
+            </table>
+        </groupBox>
+        <groupBox id="resourcesBox" caption="msg://com.company.candyshop.entity/CandyShop.resources">
+            <table id="resourcesTable" dataContainer="resourcesDc" width="100%" height="200px">
+                <actions>
+                    <action id="create" type="create"/>
+                    <action id="edit" type="edit"/>
+                    <action id="remove" type="remove"/>
+                </actions>
+                <columns>
+                    <column id="resourceName"/>
+                    <column id="amount"/>
+                    <column id="dimension"/>
+                </columns>
+                <buttonsPanel>
+                    <button action="resourcesTable.create"/>
+                    <button action="resourcesTable.edit"/>
+                    <button action="resourcesTable.remove"/>
+                </buttonsPanel>
+            </table>
+        </groupBox>
+        <groupBox id="confectioneriesBox" caption="msg://com.company.candyshop.entity/CandyShop.confectioneries">
+            <table id="confectioneriesTable" dataContainer="confectioneriesDc" width="100%" height="200px">
+                <actions>
+                    <action id="create" type="create"/>
+                    <action id="edit" type="edit"/>
+                    <action id="remove" type="remove"/>
+                </actions>
+                <columns>
+                    <column id="confectioneryName"/>
+                    <column id="number"/>
+                </columns>
+                <buttonsPanel>
+                    <button action="confectioneriesTable.create"/>
+                    <button action="confectioneriesTable.edit"/>
+                    <button action="confectioneriesTable.remove"/>
+                </buttonsPanel>
+            </table>
+        </groupBox>
+        <groupBox id="purchasesBox" caption="msg://com.company.candyshop.entity/CandyShop.purchases">
+            <table id="purchasesTable" dataContainer="purchasesDc" width="100%" height="200px">
+                <actions>
+                    <action id="create" type="create"/>
+                    <action id="edit" type="edit"/>
+                    <action id="remove" type="remove"/>
+                </actions>
+                <columns>
+                    <column id="name"/>
+                    <column id="amount"/>
+                    <column id="dimension"/>
+                </columns>
+                <buttonsPanel>
+                    <button action="purchasesTable.create"/>
+                    <button action="purchasesTable.edit"/>
+                    <button action="purchasesTable.remove"/>
+                </buttonsPanel>
+            </table>
+        </groupBox>
+        <groupBox id="ordersBox" caption="msg://com.company.candyshop.entity/CandyShop.orders">
+            <table id="ordersTable" dataContainer="ordersDc" width="100%" height="200px">
+                <actions>
+                    <action id="create" type="create"/>
+                    <action id="edit" type="edit"/>
+                    <action id="remove" type="remove"/>
+                </actions>
+                <columns>
+                    <column id="orderNumber"/>
+                    <column id="startReady"/>
+                    <column id="serveReady"/>
+                </columns>
+                <buttonsPanel>
+                    <button action="ordersTable.create"/>
+                    <button action="ordersTable.edit"/>
+                    <button action="ordersTable.remove"/>
+                </buttonsPanel>
+            </table>
+        </groupBox>
+        <hbox id="editActions" spacing="true">
+            <button id="commitAndCloseBtn" action="windowCommitAndClose"/>
+            <button id="closeBtn" action="windowClose"/>
+        </hbox>
+    </layout>
+</window>
