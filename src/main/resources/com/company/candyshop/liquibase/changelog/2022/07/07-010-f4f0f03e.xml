@@ -232,4 +232,5 @@
             <column name="DELETED_DATE"/>
         </createIndex>
     </changeSet>
+
 </databaseChangeLog>
