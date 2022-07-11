@@ -3,6 +3,7 @@ package com.company.candyshop.screen.confectionery;
 import com.company.candyshop.app.ConfectioneryService;
 import com.company.candyshop.app.OrderService;
 import com.company.candyshop.screen.order.OrderEdit;
+import io.jmix.core.Messages;
 import io.jmix.ui.Notifications;
 import io.jmix.ui.screen.*;
 import com.company.candyshop.entity.Confectionery;
@@ -20,11 +21,12 @@ public class ConfectioneryEdit extends StandardEditor<Confectionery> {
     private ConfectioneryService confectioneryService;
     @Autowired
     private Notifications notifications;
+    @Autowired
+    private Messages messages;
     @Subscribe
     public void onBeforeCommitChanges(BeforeCommitChangesEvent event) {
         if (!confectioneryService.consumeResources(getEditedEntity())) {
-            notifications.create().withCaption("There are not enough resources to manufacture " +
-                    "such a quantity of products")
+            notifications.create().withCaption(messages.getMessage(("msg://localization/denyConfectionery")))
                     .withType(Notifications.NotificationType.WARNING)
                     .show();
             event.preventCommit();

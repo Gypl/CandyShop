@@ -26,7 +26,7 @@ public class Confectionery {
     @JoinColumn(name = "CONFECRIONERY_NAME_ID", nullable = false)
     @NotNull
     @InstanceName
-    private FlowSheet confecrioneryName;
+    private FlowSheet confectioneryName;
 
     @Column(name = "NUMBER_", nullable = false)
     @NotNull
@@ -45,12 +45,12 @@ public class Confectionery {
     @Temporal(TemporalType.TIMESTAMP)
     private Date deletedDate;
 
-    public void setConfecrioneryName(FlowSheet confecrioneryName) {
-        this.confecrioneryName = confecrioneryName;
+    public void setConfectioneryName(FlowSheet confectioneryName) {
+        this.confectioneryName = confectioneryName;
     }
 
-    public FlowSheet getConfecrioneryName() {
-        return confecrioneryName;
+    public FlowSheet getConfectioneryName() {
+        return confectioneryName;
     }
 
     public Date getDeletedDate() {

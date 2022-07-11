@@ -30,7 +30,7 @@ public class ConfectioneryService {
         List<Confectionery> confectioneryOldList = confectionery.getCandyShop().getConfectioneries();
         if (confectioneryOldList != null) {
             for (Confectionery confOld : confectioneryOldList) {
-                if (confOld.getConfecrioneryName().equals(confectionery.getConfecrioneryName())) {
+                if (confOld.getConfectioneryName().equals(confectionery.getConfectioneryName())) {
                     cookedNumber = confOld.getNumber();
                     confectioneryOldUUID = confOld.getId();
                     existFlag = true;
@@ -50,7 +50,7 @@ public class ConfectioneryService {
         } else return false;
 
         // Проверка наличия нужного количества ресурсов.
-        List<Ingredient> ingredientList = confectionery.getConfecrioneryName().getIngredients();
+        List<Ingredient> ingredientList = confectionery.getConfectioneryName().getIngredients();
         if (ingredientList != null){
             for (Ingredient ingr : ingredientList) {
                 String ingredientName = ingr.getIngredientName().getResourceName();

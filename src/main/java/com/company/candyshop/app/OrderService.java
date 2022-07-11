@@ -2,7 +2,6 @@ package com.company.candyshop.app;
 
 import com.company.candyshop.entity.*;
 import io.jmix.core.DataManager;
-import io.jmix.core.Id;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -34,7 +33,7 @@ public class OrderService {
         Map<FlowSheet,Integer> confectioneries = new HashMap<>();
         if (confectioneryList.size() != 0) {
             for (Confectionery conf : confectioneryList) {
-                confectioneries.put(conf.getConfecrioneryName(), conf.getNumber());
+                confectioneries.put(conf.getConfectioneryName(), conf.getNumber());
             }
         } else return false;
 
@@ -111,7 +110,7 @@ public class OrderService {
 
         if (orderedConfectioneryList != null || confectioneryList != null) {
             for (Confectionery conf : confectioneryList) {
-                confectioneries.put(conf.getConfecrioneryName(), conf.getId());
+                confectioneries.put(conf.getConfectioneryName(), conf.getId());
             }
             for (OrderedConfectionery oc : orderedConfectioneryList) {
                 Confectionery confectionery = dataManager.load(Confectionery.class)

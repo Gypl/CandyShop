@@ -34,9 +34,9 @@
             <column width="350px">
                 <textField id="orderNumberField" property="orderNumber" editable="false"/>
                 <checkBox id="startReadyField" property="startReady" editable="false"/>
-                <hbox id="serveReadyBox" caption="serveReady">
+                <hbox id="serveReadyBox" caption="msg://com.company.candyshop.entity/Order.serveReady">
                     <checkBox id="serveReadyField" property="serveReady" editable="false"/>
-                    <button caption="serveReady" action="serveCheck"/>
+                    <button caption="msg://com.company.candyshop.entity/Order.serveReady.button" action="serveCheck"/>
                 </hbox>
                 <entityPicker id="candyShopField" property="candyShop">
                     <actions>

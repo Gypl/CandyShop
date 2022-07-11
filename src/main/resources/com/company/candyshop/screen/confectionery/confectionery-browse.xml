@@ -46,7 +46,7 @@
                 <action id="remove" type="remove"/>
             </actions>
             <columns>
-                <column id="confecrioneryName"/>
+                <column id="confectioneryName"/>
                 <column id="number"/>
                 <column id="candyShop"/>
             </columns>
