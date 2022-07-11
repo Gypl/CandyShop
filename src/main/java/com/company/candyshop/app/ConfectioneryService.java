@@ -60,10 +60,6 @@ public class ConfectioneryService {
                     return false;
                 resources.replace(ingredientName, curentAmount, newAmount);
             }
-            for (double value : resources.values()){
-                if (value < 0)
-                    return false;
-            }
         }
 
         if (ingredientList != null){

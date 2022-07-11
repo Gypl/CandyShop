@@ -27,6 +27,7 @@
           <Dependency configuration="implementation" group="io.jmix.datatools" name="jmix-datatools-starter" />
           <Dependency configuration="implementation" group="io.jmix.datatools" name="jmix-datatools-ui-starter" />
           <Dependency configuration="implementation" group="org.springframework.boot" name="spring-boot-starter-web" />
+          <Dependency configuration="implementation" group="io.jmix.translations" name="jmix-translations-ru" />
           <Dependency configuration="runtimeOnly" group="org.hsqldb" name="hsqldb" />
           <Dependency configuration="testImplementation" group="org.springframework.boot" name="spring-boot-starter-test">
             <ExcludeRule group="org.junit.vintage" module="junit-vintage-engine" />
