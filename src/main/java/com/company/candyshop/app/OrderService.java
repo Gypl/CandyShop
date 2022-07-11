@@ -2,6 +2,7 @@ package com.company.candyshop.app;
 
 import com.company.candyshop.entity.*;
 import io.jmix.core.DataManager;
+import io.jmix.core.Id;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,8 +26,8 @@ public class OrderService {
         }
         return result + 1;
     }
-    //Создаём список заказанных изделий, список изделий для мапы изделий.
-    // Вычитаем из мапы каждую запись, если меньше то не готовы.
+    //РЎРѕР·РґР°С‘Рј СЃРїРёСЃРѕРє Р·Р°РєР°Р·Р°РЅРЅС‹С… РёР·РґРµР»РёР№, СЃРїРёСЃРѕРє РёР·РґРµР»РёР№ РґР»СЏ РјР°РїС‹ РёР·РґРµР»РёР№.
+    // Р’С‹С‡РёС‚Р°РµРј РёР· РјР°РїС‹ РєР°Р¶РґСѓСЋ Р·Р°РїРёСЃСЊ, РµСЃР»Рё РјРµРЅСЊС€Рµ С‚Рѕ РЅРµ РіРѕС‚РѕРІС‹.
     public boolean checkHaveConfectioneries(Order order){
         List<OrderedConfectionery> orderedConfectioneryList = order.getOrederedConfectioneries();
         List<Confectionery> confectioneryList = order.getCandyShop().getConfectioneries();
@@ -37,16 +38,14 @@ public class OrderService {
             }
         } else return false;
 
-        if (orderedConfectioneryList.size() != 0) {
+        if (orderedConfectioneryList != null) {
             for (OrderedConfectionery oc : orderedConfectioneryList) {
                 FlowSheet flowSheetName = oc.getConfectioneryName();
                 int curentNumber = confectioneries.get(oc.getConfectioneryName());
                 int newNumber = curentNumber - oc.getNumber();
-                confectioneries.replace(flowSheetName, curentNumber, newNumber);
-            }
-            for (double val : confectioneries.values()) {
-                if (val < 0)
+                if (newNumber < 0)
                     return false;
+                confectioneries.replace(flowSheetName, curentNumber, newNumber);
             }
             return true;
         }
@@ -69,6 +68,10 @@ public class OrderService {
         */
     }
 
+    // Р—Р°РіСЂСѓР·РёР»Рё СЃРїРёСЃРѕРє Р·Р°РєР°Р·Р°РЅРЅС‹С… РёР·РґРµР»РёР№ Рё СЃРїРёСЃРѕРє РІСЃРµС… СЂРµСЃСѓСЂСЃРѕРІ.
+    // РџСЂРѕРґСѓР±Р»РёСЂРѕРІР°Р»Рё РЅР°Р·РІР°РЅРёРµ Рё РєРѕР»РёС‡РµСЃС‚РІРѕ СЂРµСЃСѓСЂСЃРѕРІ РІ РјР°РїСѓ.
+    // Р’С‹С‡Р»Рё РёР· РјР°РїС‹ СЂРµСЃСѓСЂСЃС‹ Рё РµСЃР»Рё РѕРєР°Р·Р°Р»РѕСЃСЊ С‡С‚Рѕ СѓС€Р»Рё РІ РјРёРЅСѓСЃ, С‚Рѕ РІРѕР·РІСЂР°С‰Р°РµРј false.
+    // Р”Р°РЅРЅР°СЏ Р»РѕРіРёРєР° РїРѕР·РІРѕР»СЏРµС‚ РІС‹С‡РёС‚Р°С‚СЊ РёР· СЂРµСЃСѓСЂСЃРѕРІ РїРѕРІС‚РѕСЂСЏСЋС‰РёРµСЃСЏ РёРЅРіСЂРµРґРёРµРЅС‚С‹.
     public boolean checkHaveResources(Order order){
         CandyShop candyShop = order.getCandyShop();
         List<OrderedConfectionery> orderedConfectioneryList = order.getOrederedConfectioneries();
@@ -77,13 +80,13 @@ public class OrderService {
                 .parameter("cs",candyShop).fetchPlan("resource-fetch-plan").list();*/
         List<Resource> resourceList = candyShop.getResources();
         Map<String,Double> resources = new HashMap<>();
-        if (resourceList.size() != 0){
+        if (resourceList != null){
             for (Resource res : resourceList){
                 resources.put(res.getResourceName(),res.getAmount());
             }
         } else return false;
         List<Ingredient> ingredientList = new ArrayList<>();
-        if (orderedConfectioneryList.size() != 0){
+        if (orderedConfectioneryList != null){
             for (OrderedConfectionery oc : orderedConfectioneryList){
                 ingredientList.addAll(oc.getConfectioneryName().getIngredients());
             }
@@ -91,22 +94,22 @@ public class OrderService {
                 String ingredientName = ingr.getIngredientName().getResourceName();
                 double curentAmount = resources.get(ingr.getIngredientName().getResourceName());
                 double newAmount = curentAmount - ingr.getAmount();
-                resources.replace(ingredientName, curentAmount, newAmount);
-            }
-            for (double val : resources.values()){
-                if (val < 0)
+                if (newAmount < 0)
                     return false;
+                resources.replace(ingredientName, curentAmount, newAmount);
             }
         }
         return true;
     }
 
     public void consumeConfectioneries(Order order){
+        //if (checkHaveConfectioneries(order)) return;
+
         List<OrderedConfectionery> orderedConfectioneryList = order.getOrederedConfectioneries();
         List<Confectionery> confectioneryList = order.getCandyShop().getConfectioneries();
         Map<FlowSheet,UUID> confectioneries = new HashMap<>();
 
-        if (orderedConfectioneryList.size() != 0 || confectioneryList.size() != 0) {
+        if (orderedConfectioneryList != null || confectioneryList != null) {
             for (Confectionery conf : confectioneryList) {
                 confectioneries.put(conf.getConfecrioneryName(), conf.getId());
             }
@@ -116,25 +119,9 @@ public class OrderService {
                 int curentNumber = confectionery.getNumber();
                 int newNumber = curentNumber - oc.getNumber();
                 confectionery.setNumber(newNumber);
+                dataManager.save(confectionery);
             }
         }
     }
 
-    //Надо узнать сколько приготовлено новых изделий и вычесть их количество из ресурсов
-    public boolean consumeResources(Confectionery confectionery, int cookedNumber){
-        //int cookedNumber = 0;
-        List<Ingredient> ingredientList = confectionery.getConfecrioneryName().getIngredients();
-        //Map<Resource,Double> resources = new HashMap<>();
-        if (ingredientList.size() != 0){
-            for (Ingredient ingred : ingredientList){
-                //resources.put(ingred.getIngredientName(),ingred.getAmount());
-                Resource resource = ingred.getIngredientName();
-                double newAmount = resource.getAmount() - (ingred.getAmount() * cookedNumber);
-                if (newAmount < 0)
-                    return false;
-                resource.setAmount(newAmount);
-            }
-        }
-        return true;
-    }
 }
